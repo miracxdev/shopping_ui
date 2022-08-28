@@ -1,4 +1,5 @@
 import 'package:api_ornek0/models/services.dart';
+import 'package:api_ornek0/ui/discountscreen/discount_screen.dart';
 import 'package:api_ornek0/ui/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +40,14 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
               padding: const EdgeInsets.only(right: 10),
               child: IconButton(
-                  onPressed: () {}, icon: Icon(Icons.discount_outlined)))
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DiscountScreen(),
+                        ));
+                  },
+                  icon: Icon(Icons.discount_outlined)))
         ],
         title: Text("Shopping"),
         backgroundColor: Colors.orange,
