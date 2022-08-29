@@ -10,16 +10,20 @@ class DiscountScreen extends StatelessWidget {
         backgroundColor: Colors.orange,
         title: Text("Discount"),
       ),
+      backgroundColor: Color(0xffffffff),
       body: Column(
         children: [
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 80),
+          Padding(
+            padding: const EdgeInsets.only(top: 80),
+            child: Center(
               child: Image.asset(
+                width: 300,
                 "assets/images/discount.png",
               ),
             ),
-          )
+          ),
+          SizedBox(height: 70,),
+          Text("You do not have any discounts.",style: TextStyle(fontSize: 18),)
         ],
       ),
     );
