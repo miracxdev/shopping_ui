@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../app_constants/padding_size.dart';
-
 class NavDrawer extends StatefulWidget {
   const NavDrawer({Key? key}) : super(key: key);
 
@@ -49,7 +47,7 @@ class _NavDrawerState extends State<NavDrawer> {
             ),
           ),
           const SizedBox(
-            height: paddingL,
+            height: 25,
           ),
           ListTile(
             leading: Icon(

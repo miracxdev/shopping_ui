@@ -1,7 +1,9 @@
-import 'package:api_ornek0/models/services.dart';
-import 'package:api_ornek0/ui/discountscreen/discount_screen.dart';
 import 'package:api_ornek0/ui/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../app/services/services.dart';
+import '../controller/home_screen_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,17 +24,16 @@ class _NavDrawerState extends State<NavDrawer> {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  HomeServices homeServices = HomeServices();
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    homeServices.getData();
+    final controller = Provider.of<HomeController>(context, listen: false);
+    controller.getData();
   }
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.watch<HomeController>();
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: AppBar(
@@ -40,25 +41,20 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
               padding: const EdgeInsets.only(right: 10),
               child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DiscountScreen(),
-                        ));
-                  },
-                  icon: Icon(Icons.discount_outlined)))
+                  onPressed: () {}, icon: Icon(Icons.discount_outlined)))
         ],
         title: Text("Shopping"),
         backgroundColor: Colors.orange,
       ),
       // backgroundColor: Color(0xffF7F6DC),
-      body: ListView.builder(
-        itemCount: homeServices.homeResponseList.length,
-        itemBuilder: (context, index) => ListTile(
-          title: Text(homeServices.homeResponseList[index].title ?? ""),
-        ),
-      ),
+      body: controller.homeResponseList!.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: controller.homeResponseList!.length,
+              itemBuilder: (context, index) => ListTile(
+                title: Text(controller.homeResponseList![index].title ?? ""),
+              ),
+            ),
       bottomNavigationBar: BottomNavigationBar(
         // backgroundColor: Color(0xffF7F6DC),
         items: [
